@@ -5,14 +5,14 @@ nextflow.enable.dsl = 2
 /**
 * include workflow
 */
-// include { HELLO_WORLD_WORKFLOW } from './workflows/helloworld'
+include { HELLO_WORLD_WORKFLOW } from './workflows/helloworld'
 
 /*
 * named workflows
 */
 workflow HELLO_WORLD {  
     println "Starting hello world workflow"
-    // HELLO_WORLD_WORKFLOW()
+    HELLO_WORLD_WORKFLOW()
     println "Ended hello world workflow"
 }
 

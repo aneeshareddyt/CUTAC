@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-workflow HELLOWORLDWORKFLOW {
+workflow HELLO_WORLD_WORKFLOW {
     /* 
     * Creates a channel emitting some string values
     */

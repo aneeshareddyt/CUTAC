@@ -11,7 +11,9 @@ include { HELLO_WORLD_WORKFLOW } from './workflows/helloworld'
 * named workflows
 */
 workflow HELLO_WORLD {  
-
+    println "Starting hello world workflow"
+    HELLO_WORLD_WORKFLOW()
+    println "Ended hello world workflow"
 }
 
 

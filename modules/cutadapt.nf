@@ -14,20 +14,20 @@ process CUTADAPT {
     
 
     output:
-    tuple val(meta), path("output/${read1.name}"), path("output/${read2.name}"), emit: fq
+    tuple val(meta), path("output_cutadapt/${read1.name}"), path("output_cutadapt/${read2.name}"), emit: fq
     tuple val(meta), path( "${meta.id}.cutadapt.json" ), emit: js
 
     script:
     def args = task.ext.args ?: ""
     """
-    mkdir output
+    mkdir -p output_cutadapt
     cutadapt -j ${task.cpus} \
     --json=${meta.id}.cutadapt.json \
             --nextseq-trim=20 \
             -m 20 \
             --overlap 3 \
-            -o output/$read1 \
-    -p output/$read2 \
+            -o output_cutadapt/${read1.name} \
+    -p output_cutadapt/${read2.name} \
     $args \
     $read1 $read2
     """
@@ -44,14 +44,14 @@ process CUTADAPT {
     read2.name: ${read2.name}
     args: ${task.ext.args}
     publishdir: ${params.out_dir}/trimmed_fastq/
-    script       : mkdir output
+    script       : mkdir output_cutadapt
     cutadapt -j ${task.cpus} \
     --json=${meta.id}.cutadapt.json \
 		--nextseq-trim=20 \
 		-m 20 \
 		--overlap 3 \
-		-o output/$read1 \
-    -p output/$read2 \
+		-o output_cutadapt/$read1 \
+    -p output_cutadapt/$read2 \
     $args \
     $read1 $read2
     =================================================

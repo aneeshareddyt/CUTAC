@@ -47,5 +47,8 @@ workflow HELLO_WORLD_WORKFLOW {
         .set { ch_reads }
 
     ch_reads.view()
+
+    CUTADAPT(ch_reads)
+    
     println "hellow from workflow"
 }

@@ -39,9 +39,11 @@ workflow HELLO_WORLD_WORKFLOW {
         .fromPath(params.sample_sheet)  // Path to your CSV file
         .splitCsv(header: true)
         .map { row -> [ 
-            row[1],  // Create the meta map with ID
+            row[1],  // 
             row[2],    // Forward read file
-            row[3]     // Reverse read file
+            row[3],     // Reverse read file
+            row.Sample_Id,
+            row.Sample_Name
         ]}
         .set { ch_reads }
 

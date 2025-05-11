@@ -31,6 +31,7 @@ workflow HELLO_WORLD_WORKFLOW {
     =================================================
     Input folder : ${params.input_dir}
     Samples CSV  : ${params.sample_sheet}
+    FastQ GZ dir : ${params.cutadapt_fastq_gz_dir}
     Output dir   : ${params.out_dir}
     =================================================
     """
@@ -39,9 +40,9 @@ workflow HELLO_WORLD_WORKFLOW {
         .fromPath(params.sample_sheet)  // Path to your CSV file
         .splitCsv(header: true)
         .map { row -> [ 
-            row.Lane,
-            row.Sample_ID,
-            row.Sample_Name
+            [id: row.Lane],
+            file("${params.input_dir}/${params.cutadapt_fastq_gz_dir}/row.Sample_ID${params.cutadapt_R1_file_suffix}"),
+            file("${params.input_dir}/${params.cutadapt_fastq_gz_dir}/row.Sample_ID${params.cutadapt_R2_file_suffix}")
         ]}
         .set { ch_reads }
 

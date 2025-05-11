@@ -23,10 +23,10 @@ process CUTADAPT {
     mkdir output
     cutadapt -j ${task.cpus} \
     --json=${meta.id}.cutadapt.json \
-		--nextseq-trim=20 \
-		-m 20 \
-		--overlap 3 \
-		-o output/$read1 \
+            --nextseq-trim=20 \
+            -m 20 \
+            --overlap 3 \
+            -o output/$read1 \
     -p output/$read2 \
     $args \
     $read1 $read2
@@ -42,6 +42,7 @@ process CUTADAPT {
     read2 : ${read2}
     read1.name: ${read1.name}
     read2.name: ${read2.name}
+    args: ${task.ext.args}
     publishdir: ${params.out_dir}/trimmed_fastq/
     script       : mkdir output
     cutadapt -j ${task.cpus} \

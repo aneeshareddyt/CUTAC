@@ -41,8 +41,8 @@ workflow HELLO_WORLD_WORKFLOW {
         .splitCsv(header: true)
         .map { row -> [ 
             [id: row.Lane],
-            "${params.input_dir}/${params.cutadapt_fastq_gz_dir}/row.Sample_ID${params.cutadapt_R1_file_suffix}",
-            "${params.input_dir}/${params.cutadapt_fastq_gz_dir}/row.Sample_ID${params.cutadapt_R2_file_suffix}"
+            "${params.input_dir}/${params.cutadapt_fastq_gz_dir}/${row.Sample_ID}${params.cutadapt_R1_file_suffix}",
+            "${params.input_dir}/${params.cutadapt_fastq_gz_dir}/${row.Sample_ID}${params.cutadapt_R2_file_suffix}"
         ]}
         .set { ch_reads }
 

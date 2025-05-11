@@ -7,8 +7,36 @@ workflow HELLO_WORLD_WORKFLOW {
     * Creates a channel emitting some string values
     */
 
+    if (params.input == null) {
+        log.error "Please provide an input directory using --input"
+        exit 1
+    }
+
+    // Automatically locate the samples.csv in the input folder if not specified
+    if (params.sample_sheet == null) {
+        params.sample_sheet = "${params.input}/samples.csv"
+        
+        // Check if the file exists
+        csv_file = file(params.sample_sheet)
+        if (!csv_file.exists()) {
+            log.error "Cannot find samples.csv in input directory: ${params.sample_sheet}"
+            log.error "Please provide a sample sheet.csv file with --sample_sheet or ensure samples.csv exists in the input directory"
+            exit 1
+        }
+    }   
+
+    log.info """
+    =================================================
+    CUTADAPT WORKFLOW
+    =================================================
+    Input folder : ${params.input}
+    Samples CSV  : ${params.sample_sheet}
+    Output dir   : ${params.outdir}
+    =================================================
+    """
+
     Channel
-        .fromPath('samples.csv')  // Path to your CSV file
+        .fromPath(params.sample_sheet)  // Path to your CSV file
         .splitCsv(header: true)
         .map { row -> [ 
             [id: row.sample_id],  // Create the meta map with ID

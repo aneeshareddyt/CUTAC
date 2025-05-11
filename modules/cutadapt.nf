@@ -30,6 +30,27 @@ process CUTADAPT {
     -p output/$read2 \
     $args \
     $read1 $read2
+    """
 
+    log.info """
+    =================================================
+    CUTADAPT WORKFLOW
+    =================================================
+    script : 
+    Samples CSV  : ${params.sample_sheet}
+    read1 : ${read1}
+    read2 : ${read2}
+    publishdir: ${params.outdir}/trimmed_fastq/
+    script       : mkdir output
+    cutadapt -j ${task.cpus} \
+    --json=${meta.id}.cutadapt.json \
+		--nextseq-trim=20 \
+		-m 20 \
+		--overlap 3 \
+		-o output/$read1 \
+    -p output/$read2 \
+    $args \
+    $read1 $read2
+    =================================================
     """
 }

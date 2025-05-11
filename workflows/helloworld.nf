@@ -31,7 +31,7 @@ workflow HELLO_WORLD_WORKFLOW {
     =================================================
     Input folder : ${params.input_dir}
     Samples CSV  : ${params.sample_sheet}
-    Output dir   : ${params.outdir}
+    Output dir   : ${params.out_dir}
     =================================================
     """
 

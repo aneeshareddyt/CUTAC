@@ -7,14 +7,14 @@ workflow HELLO_WORLD_WORKFLOW {
     * Creates a channel emitting some string values
     */
 
-    if (params.input == null) {
+    if (params.input_dir == null) {
         log.error "Please provide an input directory using --input"
         exit 1
     }
 
     // Automatically locate the samples.csv in the input folder if not specified
     if (params.sample_sheet == null) {
-        params.sample_sheet = "${params.input}/samples.csv"
+        params.sample_sheet = "${params.input_dir}/samples.csv"
         
         // Check if the file exists
         csv_file = file(params.sample_sheet)
@@ -29,7 +29,7 @@ workflow HELLO_WORLD_WORKFLOW {
     =================================================
     CUTADAPT WORKFLOW
     =================================================
-    Input folder : ${params.input}
+    Input folder : ${params.input_dir}
     Samples CSV  : ${params.sample_sheet}
     Output dir   : ${params.outdir}
     =================================================

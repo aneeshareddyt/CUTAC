@@ -8,7 +8,7 @@ workflow HELLO_WORLD_WORKFLOW {
     */
 
     if (params.input_dir == null) {
-        log.error "Please provide an input directory using --input"
+        log.error "Please provide an input directory using --input_dir"
         exit 1
     }
 
@@ -40,8 +40,8 @@ workflow HELLO_WORLD_WORKFLOW {
         .splitCsv(header: true)
         .map { row -> [ 
             [id: row.sample_id],  // Create the meta map with ID
-            file(row.read_1),    // Forward read file
-            file(row.read_2)     // Reverse read file
+            row.read_1,    // Forward read file
+            row.read_2     // Reverse read file
         ]}
         .set { ch_reads }
 

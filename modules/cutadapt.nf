@@ -7,7 +7,7 @@ process CUTADAPT {
 
     tag "CUTADAPT on ${meta.id}"
 
-    publishDir "${params.out_dir}/trimmed_fastq/", pattern: '*.gz', mode: 'copy'
+    publishDir "${params.out_dir}/trimmed_fastq/", pattern: 'output_cutadapt/*.gz', mode: 'copy'
 
     input:
     tuple val(meta), path(read1), path(read2)

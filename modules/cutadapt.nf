@@ -14,7 +14,7 @@ process CUTADAPT {
     
 
     output:
-    tuple val(meta), path("output_cutadapt/${read1.name}"), path("output_cutadapt/${read2.name}"), emit: fq
+    tuple val(meta), path("output_cutadapt/${read1.simpleName}_trimmed.fastq.gz"), path("output_cutadapt/${read2.simpleName}_trimmed.fastq.gz"), emit: fq
     tuple val(meta), path( "${meta.id}.cutadapt.json" ), emit: js
 
     script:
@@ -26,8 +26,8 @@ process CUTADAPT {
             --nextseq-trim=20 \
             -m 20 \
             --overlap 3 \
-            -o output_cutadapt/${read1.name} \
-    -p output_cutadapt/${read2.name} \
+            -o output_cutadapt/${read1.simpleName}_trimmed.fastq.gz \
+    -p output_cutadapt/${read2.simpleName}_trimmed.fastq.gz \
     $args \
     $read1 $read2
 

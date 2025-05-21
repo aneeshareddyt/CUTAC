@@ -15,7 +15,7 @@ process CUTADAPT {
 
     output:
     tuple val(meta), path("hello_${read1.simpleName}.txt"), path("hello_${read2.simpleName}.txt"), emit: fq
-    tuple val(meta), path( "${meta.id}.cutadapt.json" ), emit: js
+    // tuple val(meta), path( "${meta.id}.cutadapt.json" ), emit: js
 
     script:
     def args = task.ext.args ?: ""

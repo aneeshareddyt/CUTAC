@@ -20,15 +20,6 @@ process CUTADAPT {
     script:
     def args = task.ext.args ?: ""
     """
-    cutadapt -j ${task.cpus} \
-    --json=${meta.id}.cutadapt.json \
-            --nextseq-trim=20 \
-            -m 20 \
-            --overlap 3 \
-            -o ${read1.simpleName}_trimmed.fastq.gz \
-    -p ${read2.simpleName}_trimmed.fastq.gz \
-    $args \
-    $read1 $read2
-
+    echo "hello, ${args}, ${read1}, ${read2}" > hello_${read1.simpleName}.txt
     """
 }

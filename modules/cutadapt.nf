@@ -14,12 +14,13 @@ process CUTADAPT {
     
 
     output:
-    tuple val(meta), path("${read1.simpleName}_trimmed.fastq.gz"), path("${read2.simpleName}_trimmed.fastq.gz"), emit: fq
+    tuple val(meta), path("hello_${read1.simpleName}.txt"), path("hello_${read2.simpleName}.txt"), emit: fq
     tuple val(meta), path( "${meta.id}.cutadapt.json" ), emit: js
 
     script:
     def args = task.ext.args ?: ""
     """
-    echo "hello, ${args}, ${read1}, ${read2}" > hello_${read1.simpleName}.txt
+    echo "hello, ${args}, ${read1}" > hello_${read1.simpleName}.txt
+    echo "hello, ${args}, ${read2}" > hello_${read2.simpleName}.txt
     """
 }
